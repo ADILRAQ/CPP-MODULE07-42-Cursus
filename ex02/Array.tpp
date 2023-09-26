@@ -6,7 +6,7 @@
 /*   By: araqioui <araqioui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:30:43 by araqioui          #+#    #+#             */
-/*   Updated: 2023/09/26 10:15:23 by araqioui         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:39:30 by araqioui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ template <typename T> Array<T>::Array(unsigned int n) : length(n)
 		arr = NULL;
 }
 
-template <typename T> Array<T>::Array(const Array &obj)
+template <typename T> Array<T>::Array(const Array &obj) : arr(NULL)
 {
 	*this = obj;
 }
@@ -48,7 +48,7 @@ template <typename T> Array<T> &Array<T>::operator = (const Array &source)
 		this->arr = new T[size];
 		while (i < size)
 		{
-			this->arr[i] = source.elemAccess(i);
+			this->arr[i] = source[i];
 			i++;
 		}
 	}
@@ -62,7 +62,14 @@ template <typename T> unsigned int Array<T>::size(void) const
 	return (length);
 }
 
-template <typename T> T	Array<T>::elemAccess(unsigned int idx) const
+template <typename T> T	&Array<T>::operator [] (unsigned int idx)
+{
+	if (!arr || idx >= this->size())
+		throw BadAccess();
+	return (arr[idx]);
+}
+
+template <typename T> T	Array<T>::operator [] (unsigned int idx) const
 {
 	if (!arr || idx >= this->size())
 		throw BadAccess();

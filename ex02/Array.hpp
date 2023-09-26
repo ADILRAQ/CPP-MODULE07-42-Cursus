@@ -6,7 +6,7 @@
 /*   By: araqioui <araqioui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:44:09 by araqioui          #+#    #+#             */
-/*   Updated: 2023/09/26 10:24:10 by araqioui         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:39:17 by araqioui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ class	Array{
 
 		// Implemented Methods
 		unsigned int	size(void) const;
-		T				elemAccess(unsigned int idx) const;
+		T				&operator [] (unsigned int idx);
+		T				operator [] (unsigned int idx) const;
 
 		// Setters
 		void			setArr(T value);
 
 		// Nested Class
-		class BadAccess : std::exception {
+		class BadAccess : public std::exception {
 			public:
 				const char	*what(void) const throw();
 		};
