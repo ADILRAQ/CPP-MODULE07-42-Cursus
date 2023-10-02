@@ -6,7 +6,7 @@
 /*   By: araqioui <araqioui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:30:43 by araqioui          #+#    #+#             */
-/*   Updated: 2023/09/26 13:39:30 by araqioui         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:17:26 by araqioui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ template <typename T> Array<T> &Array<T>::operator = (const Array &source)
 	{
 		this->length = size;
 		if (this->arr)
+		{
 			delete[] this->arr;
-		this->arr = new T[size];
+			this->arr = NULL;
+		}
+		if (size)
+			this->arr = new T[size];
 		while (i < size)
 		{
 			this->arr[i] = source[i];
@@ -74,17 +78,6 @@ template <typename T> T	Array<T>::operator [] (unsigned int idx) const
 	if (!arr || idx >= this->size())
 		throw BadAccess();
 	return (arr[idx]);
-}
-
-// Setters
-
-template <typename T> void	Array<T>::setArr(T value)
-{
-	unsigned int	i = 0;
-	unsigned int	size = this->size();
-
-	while (arr && i < size)
-		arr[i++] = value;
 }
 
 // Nested Class
