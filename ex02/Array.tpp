@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
+#include "Array.hpp"
+
 // Orthodox Canonical Form
 
 template <typename T> Array<T>::Array(void) : arr(NULL), length(0)
